@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Olha para mim - Acessibilidade e Inclusão</title>
+<style>
+  * {margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; scroll-behavior: smooth;}
+  body {background-color: #f8f9fa; color: #333;}
+  header {position: fixed; top: 0; width: 100%; background-color: #1c3557; color: white;
+          display: flex; justify-content: space-between; align-items: center;
+          padding: 15px 40px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); z-index: 1000;}
+  header h1 {font-size: 1.6rem; letter-spacing: 1px;}
+  nav a {color: white; margin-left: 25px; text-decoration: none; font-weight: 500; transition: color 0.3s;}
+  nav a:hover {color: #ffcc66;}
+  .hero {display: flex; flex-direction: column; align-items: center; justify-content: center;
+         text-align: center; height: 90vh; padding: 0 20px;
+         background: linear-gradient(rgba(28,53,87,0.85), rgba(28,53,87,0.85)),
+                     url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1470&q=80');
+         background-size: cover; background-position: center; color: white;}
+  .hero h2 {font-size: 2.5rem; max-width: 700px; margin-bottom: 20px;}
+  .hero p {font-size: 1.1rem; max-width: 600px; line-height: 1.6; margin-bottom: 35px;}
+  .hero a {background-color: #ffcc66; color: #1c3557; padding: 12px 25px; font-size: 1.1rem; font-weight: bold;
+           border-radius: 6px; text-decoration: none; transition: background 0.3s;}
+  .hero a:hover {background-color: #ffd580;}
+  section {padding: 80px 10%;}
+  .sobre {text-align: center;}
+  .sobre h3 {color: #1c3557; font-size: 2rem; margin-bottom: 20px;}
+  .sobre p {max-width: 750px; margin: auto; font-size: 1.1rem; line-height: 1.8;}
+  .recursos {display: flex; flex-wrap: wrap; justify-content: center; margin-top: 60px;}
+  .recurso {background: white; width: 280px; margin: 15px; padding: 30px; border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08); text-align: center; transition: transform 0.3s;}
+  .recurso:hover {transform: translateY(-5px);}
+  .recurso h4 {color: #1c3557; margin-bottom: 10px;}
+  footer {background-color: #1c3557; color: white; text-align: center; padding: 20px; font-size: 0.9rem;}
+  @media (max-width: 900px) {
+    header {flex-direction: column; text-align: center;}
+    .hero h2 {font-size: 2rem;}
+    .recurso {width: 90%;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Olha para mim</h1>
+  <nav>
+    <a href="#sobre">Quem Somos</a>
+    <a href="pages/auth/login.html">Login</a>
+    <a href="pages/auth/cadastro.html">Cadastro</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h2>Conectando pessoas e lugares através da acessibilidade</h2>
+  <p>O projeto <strong>Olha para mim</strong> promove a inclusão e visibilidade das condições de acessibilidade em espaços públicos e privados.</p>
+  <a href="pages/auth/login.html">Acessar Plataforma</a>
+</section>
+
+<section id="sobre" class="sobre">
+  <h3>Quem Somos</h3>
+  <p>Somos uma iniciativa dedicada à acessibilidade e à inclusão social. Nosso sistema permite que qualquer pessoa avalie a acessibilidade de locais e colabore com um mapa inclusivo.</p>
+
+  <div class="recursos">
+    <div class="recurso"><h4>♿ Avaliação de Locais</h4><p>Usuários registram e avaliam a acessibilidade de diferentes espaços.</p></div>
+    <div class="recurso"><h4>📊 Painel Administrativo</h4><p>Equipe gestora acompanha relatórios e estatísticas sobre acessibilidade urbana.</p></div>
+    <div class="recurso"><h4>🗺️ Mapa Interativo</h4><p>Visualize os locais avaliados com diferentes níveis de acessibilidade.</p></div>
+    <div class="recurso"><h4>🧏 Recursos Inclusivos</h4><p>Compatível com leitores de tela, Libras e personalização de contraste.</p></div>
+  </div>
+</section>
+
+<footer>
+  © 2025 Olha para mim — Todos os direitos reservados
+</footer>
+
+</body>
+</html>

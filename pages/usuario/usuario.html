@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Olha para mim - Usuário</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  body {
+    display: flex;
+    height: 100vh;
+    background-color: #f5f6fa;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    width: 250px;
+    background-color: #1c3557;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 25px 0;
+  }
+
+  .logo {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+
+  .logo a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .logo a:hover {
+    color: #ffcc66;
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+  }
+
+  .menu a {
+    color: white;
+    text-decoration: none;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.3s;
+    font-size: 1rem;
+  }
+
+  .menu a:hover {
+    background-color: #284b75;
+  }
+
+  .menu i {
+    font-size: 1.2rem;
+  }
+
+  .logout {
+    text-align: center;
+    padding: 15px;
+  }
+
+  .logout button {
+    background: #ff6666;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+
+  .logout button:hover {
+    background: #e65050;
+  }
+
+  /* Conteúdo principal */
+  .main {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+  }
+
+  .welcome {
+    font-size: 1.8rem;
+    color: #1c3557;
+    margin-bottom: 20px;
+  }
+
+  .card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+  }
+
+  .card h3 {
+    color: #1c3557;
+    margin-bottom: 10px;
+  }
+
+  .btn {
+    background-color: #1c3557;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  .btn:hover {
+    background-color: #284b75;
+  }
+
+  .mapa {
+    background-color: #e9ecef;
+    height: 400px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  /* Responsivo */
+  @media (max-width: 900px) {
+    .sidebar {
+      width: 90px;
+    }
+    .menu a span {
+      display: none;
+    }
+    .main {
+      padding: 20px;
+    }
+  }
+</style>
+<!-- Ícones -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Menu lateral -->
+  <div class="sidebar">
+    <div>
+      <div class="logo">
+        <!-- ✅ Link para voltar à página inicial -->
+        <a href="../../index.html">Olha<br>para mim</a>
+      </div>
+
+      <div class="menu">
+        <a href="#"><i class="fa-solid fa-user"></i><span>Perfil</span></a>
+        <a href="#"><i class="fa-solid fa-pen"></i><span>Avaliar Local</span></a>
+        <a href="#"><i class="fa-solid fa-map-location-dot"></i><span>Mapa</span></a>
+      </div>
+    </div>
+
+    <div class="logout">
+      <button id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Sair</button>
+    </div>
+  </div>
+
+  <!-- Conteúdo principal -->
+  <div class="main">
+    <h1 class="welcome">Olá, <span id="nomeUsuario">Usuário</span> 👋</h1>
+
+    <div class="card">
+      <h3>Bem-vindo à plataforma “Olha para mim”</h3>
+      <p>Você pode avaliar a acessibilidade de locais públicos e privados, ajudando a construir um mapa colaborativo de inclusão. Clique abaixo para iniciar sua avaliação.</p>
+      <br>
+      <button class="btn" onclick="alert('Função de avaliação em desenvolvimento!')"><i class="fa-solid fa-pen"></i> Avaliar Local</button>
+    </div>
+
+    <div class="card">
+      <h3>Mapa de Acessibilidade</h3>
+      <div class="mapa">
+        🗺️ O mapa interativo será exibido aqui em breve.
+      </div>
+    </div>
+  </div>
+
+<script>
+  // Recupera o nome do usuário logado (sessionStorage criado no login)
+  const nomeSpan = document.getElementById("nomeUsuario");
+  const nomeUsuario = sessionStorage.getItem("usuarioLogado");
+
+  if (nomeUsuario) {
+    nomeSpan.textContent = nomeUsuario;
+  } else {
+    // Caso o usuário tente acessar sem login, volta para o login
+    alert("Por favor, faça login para acessar esta página.");
+    window.location.href = "../auth/login.html";
+  }
+
+  // Função de logout
+  document.getElementById("logoutBtn").addEventListener("click", function(){
+    sessionStorage.removeItem("usuarioLogado");
+    alert("Você saiu da conta.");
+    window.location.href = "../auth/login.html";
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Olha para mim - Painel Administrativo</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  body {
+    display: flex;
+    height: 100vh;
+    background-color: #f5f6fa;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    width: 250px;
+    background-color: #1c3557;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 25px 0;
+  }
+
+  .logo {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+
+  .logo a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .logo a:hover {
+    color: #ffcc66;
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+  }
+
+  .menu a {
+    color: white;
+    text-decoration: none;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.3s;
+    font-size: 1rem;
+  }
+
+  .menu a:hover {
+    background-color: #284b75;
+  }
+
+  .menu i {
+    font-size: 1.2rem;
+  }
+
+  .logout {
+    text-align: center;
+    padding: 15px;
+  }
+
+  .logout button {
+    background: #ff6666;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+
+  .logout button:hover {
+    background: #e65050;
+  }
+
+  /* Conteúdo principal */
+  .main {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+  }
+
+  .welcome {
+    font-size: 1.8rem;
+    color: #1c3557;
+    margin-bottom: 25px;
+  }
+
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+
+  .card {
+    background: white;
+    flex: 1;
+    min-width: 230px;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+
+  .card h3 {
+    color: #1c3557;
+    margin-bottom: 10px;
+  }
+
+  .card p {
+    font-size: 2rem;
+    color: #284b75;
+    font-weight: bold;
+  }
+
+  .chart {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 25px;
+  }
+
+  .chart h3 {
+    color: #1c3557;
+    margin-bottom: 20px;
+  }
+
+  .chart-placeholder {
+    background-color: #e9ecef;
+    height: 300px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+    font-size: 1.1rem;
+  }
+
+  /* Responsivo */
+  @media (max-width: 900px) {
+    .sidebar {
+      width: 90px;
+    }
+    .menu a span {
+      display: none;
+    }
+    .main {
+      padding: 20px;
+    }
+    .cards {
+      flex-direction: column;
+    }
+  }
+</style>
+<!-- Ícones -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Menu lateral -->
+  <div class="sidebar">
+    <div>
+      <div class="logo">
+        <!-- ✅ Volta para a landing page -->
+        <a href="../../index.html">Olha<br>para mim</a>
+      </div>
+
+      <div class="menu">
+        <a href="#"><i class="fa-solid fa-chart-line"></i><span>Dashboard</span></a>
+        <a href="#"><i class="fa-solid fa-list-check"></i><span>Avaliações</span></a>
+        <a href="#"><i class="fa-solid fa-users"></i><span>Usuários</span></a>
+      </div>
+    </div>
+
+    <div class="logout">
+      <button id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Sair</button>
+    </div>
+  </div>
+
+  <!-- Conteúdo principal -->
+  <div class="main">
+    <h1 class="welcome">Painel Administrativo 👩‍💼</h1>
+
+    <!-- Cards de resumo -->
+    <div class="cards">
+      <div class="card">
+        <h3>Locais avaliados</h3>
+        <p id="totalLocais">45</p>
+      </div>
+      <div class="card">
+        <h3>Usuários cadastrados</h3>
+        <p id="totalUsuarios">12</p>
+      </div>
+      <div class="card">
+        <h3>Avaliações pendentes</h3>
+        <p id="pendentes">3</p>
+      </div>
+    </div>
+
+    <!-- Gráfico ilustrativo -->
+    <div class="chart">
+      <h3>Estatísticas de Acessibilidade</h3>
+      <div class="chart-placeholder">
+        📊 Gráfico de acessibilidade será exibido aqui.
+      </div>
+    </div>
+  </div>
+
+<script>
+  // Verifica se o admin está logado
+  const usuarioLogado = sessionStorage.getItem("usuarioLogado");
+
+  if (usuarioLogado !== "admin") {
+    alert("Acesso restrito. Faça login como administrador.");
+    window.location.href = "../auth/login.html";
+  }
+
+  // Botão sair
+  document.getElementById("logoutBtn").addEventListener("click", function(){
+    sessionStorage.removeItem("usuarioLogado");
+    alert("Sessão encerrada.");
+    window.location.href = "../auth/login.html";
+  });
+
+  // Dados simulados (poderão vir de API futuramente)
+  const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+  document.getElementById("totalUsuarios").textContent = usuarios.length + 2; // inclui admin + user fixos
+</script>
+
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Olha para mim - Cadastro</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  body {
+    display: flex;
+    height: 100vh;
+    background-color: #f8f9fa;
+  }
+
+  /* Barra lateral */
+  .sidebar {
+    width: 35%;
+    background-color: #1c3557;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .sidebar a {
+    color: white;
+    text-decoration: none;
+    font-size: 2.5rem;
+    font-weight: bold;
+    line-height: 1.1;
+    transition: color 0.3s;
+  }
+
+  .sidebar a:hover {
+    color: #ffcc66;
+  }
+
+  /* Área principal */
+  .main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .register-box {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 420px;
+  }
+
+  .register-box h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #1c3557;
+  }
+
+  label {
+    display: block;
+    font-weight: bold;
+    margin-top: 15px;
+    color: #333;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+
+  button {
+    width: 100%;
+    background-color: #1c3557;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    background-color: #284b75;
+  }
+
+  .extra {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .extra a {
+    color: #1c3557;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .extra a:hover {
+    text-decoration: underline;
+  }
+
+  /* Responsivo */
+  @media (max-width: 900px) {
+    .sidebar {
+      display: none;
+    }
+    .main {
+      width: 100%;
+      padding: 20px;
+    }
+    .register-box {
+      box-shadow: none;
+      max-width: 100%;
+      padding: 30px;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <!-- ✅ Link para voltar à landing page -->
+    <a href="../../index.html">Olha<br>para mim</a>
+  </div>
+
+  <div class="main">
+    <div class="register-box">
+      <h2>Crie sua conta</h2>
+      <form id="registerForm">
+        <label for="nome">Nome completo</label>
+        <input type="text" id="nome" placeholder="Seu nome" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="seuemail@exemplo.com" required>
+
+        <label for="usuario">Usuário</label>
+        <input type="text" id="usuario" placeholder="Crie seu usuário" required>
+
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" placeholder="Crie sua senha" required>
+
+        <label for="confirma">Confirmar senha</label>
+        <input type="password" id="confirma" placeholder="Repita a senha" required>
+
+        <button type="submit">Cadastrar</button>
+
+        <div class="extra">
+          <span>Já possui conta? <a href="login.html">Entrar</a></span>
+        </div>
+      </form>
+    </div>
+  </div>
+
+<script>
+  document.getElementById("registerForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const nome = document.getElementById("nome").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const usuario = document.getElementById("usuario").value.trim().toLowerCase();
+    const senha = document.getElementById("senha").value.trim();
+    const confirma = document.getElementById("confirma").value.trim();
+
+    // Validações
+    if (!nome || !email || !usuario || !senha) {
+      alert("Preencha todos os campos!");
+      return;
+    }
+
+    if (senha !== confirma) {
+      alert("As senhas não coincidem!");
+      return;
+    }
+
+    if (usuario === "admin") {
+      alert("Não é permitido cadastrar usuários administradores!");
+      return;
+    }
+
+    // Recupera lista de usuários
+    let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+    // Verifica se o usuário já existe
+    const existe = usuarios.find(u => u.usuario === usuario);
+    if (existe) {
+      alert("Este nome de usuário já está cadastrado!");
+      return;
+    }
+
+    // Cria novo usuário comum
+    const novoUsuario = {
+      nome: nome,
+      email: email,
+      usuario: usuario,
+      senha: senha,
+      tipo: "comum"
+    };
+
+    // Salva no LocalStorage
+    usuarios.push(novoUsuario);
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
+    alert(`Usuário ${nome} cadastrado com sucesso!\nAgora você pode fazer login.`);
+    window.location.href = "login.html"; // ✅ Redireciona corretamente
+  });
+</script>
+
+</body>
+</html>
